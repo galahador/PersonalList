@@ -6,6 +6,6 @@ target 'PersonalList' do
   use_frameworks!
 
   # Pods for PersonalList
-  pod 'Alamofire'
-
+  pod 'RealmSwift'
+	
 end
