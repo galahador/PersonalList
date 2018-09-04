@@ -36,8 +36,16 @@ class CategoryViewController: UITableViewController {
     
     //MARK - Table View Delegate method
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        performSegue(withIdentifier: "goToItems", sender: self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! TodoTableViewController
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categoryArray[indexPath.row]
+        }
+    }
+    //MARK - Data Manipulation method
     
     fileprivate func saveCategory() {
         do {
@@ -54,8 +62,6 @@ class CategoryViewController: UITableViewController {
             print("Error with loading category \(error) \(#function)")
         }
     }
-    
-    //MARK - Data Manipulation method
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         
@@ -78,6 +84,6 @@ class CategoryViewController: UITableViewController {
     }
     
     @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
-        
+        //TODO - set delete
     }
 }
