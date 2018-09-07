@@ -35,7 +35,7 @@ class CategoryViewController: UITableViewController {
 
         return cell
     }
-
+    
     //MARK - Table View Delegate method
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToItems", sender: self)
@@ -47,6 +47,7 @@ class CategoryViewController: UITableViewController {
             destinationVC.selectedCategory = categoryArray?[indexPath.row]
         }
     }
+    
     //MARK - Data Manipulation method
 
     fileprivate func saveCategory(category: Category) {
@@ -63,16 +64,21 @@ class CategoryViewController: UITableViewController {
         categoryArray = realm.objects(Category.self)
         tableView.reloadData()
     }
-
-    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
-
+    
+    //MARK: - Motion
+    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+        setupAlertController()
+    }
+    
+    //MARK: - Seting up Alert Controller logic
+    fileprivate func setupAlertController() {
         var textFiled = UITextField()
         let alertController = UIAlertController(title: "Add", message: "Wont to add new?", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Add", style: .default) { (action) in
-
+            
             let newCategory = Category()
             newCategory.name = textFiled.text!
-
+            
             self.saveCategory(category: newCategory)
             self.tableView.reloadData()
         }
@@ -83,7 +89,12 @@ class CategoryViewController: UITableViewController {
         alertController.addAction(alertAction)
         present(alertController, animated: true, completion: nil)
     }
+
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        setupAlertController()
+    }
 }
+
 //MARK: - Swipe TableView delegate
 extension CategoryViewController: SwipeTableViewCellDelegate {
 
@@ -97,20 +108,20 @@ extension CategoryViewController: SwipeTableViewCellDelegate {
                 print("Problem with delete \(error)")
             }
         }
-//        tableView.reloadData()
+        //        tableView.reloadData()
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
-        
+
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
             self.categoryDelete(with: indexPath)
         }
-        
+
         deleteAction.image = UIImage(named: "delete_icon")
         return [deleteAction]
     }
-    
+
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
         options.expansionStyle = .destructive
