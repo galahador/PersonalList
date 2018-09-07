@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -34,12 +33,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Todo" id="ZOs-qa-BRr">
-                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="1XG-3L-NSs">
-                            <color key="tintColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            <connections>
-                                <action selector="deleteTapped:" destination="riK-vN-mhs" id="esU-f4-KhH"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bpE-ff-sZl">
                             <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                             <connections>
@@ -87,20 +80,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="vbO-HA-Vnp">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="3bB-jv-b0h">
-                                <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="addNewItems:" destination="iwb-bc-1yU" id="lQM-w9-cef"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="trash" id="XTT-nj-MOV">
-                                <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="deleteTapped:" destination="iwb-bc-1yU" id="TEO-Fu-nH9"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3bB-jv-b0h">
+                            <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                            <connections>
+                                <action selector="addNewItems:" destination="iwb-bc-1yU" id="lQM-w9-cef"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yma-oE-APz" userLabel="First Responder" sceneMemberID="firstResponder"/>

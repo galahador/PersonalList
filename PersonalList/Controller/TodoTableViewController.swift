@@ -12,7 +12,6 @@ import RealmSwift
 
 class TodoTableViewController: UITableViewController {
     var todoItems: Results<Item>?
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let realm = try! Realm()
 
     var selectedCategory: Category? {
@@ -65,6 +64,7 @@ class TodoTableViewController: UITableViewController {
                 try self.realm.write {
                     let newItem = Item()
                     newItem.title = textField.text!
+                    newItem.dataCreated = Date()
                     currentCategory.items.append(newItem)
                 }
             } catch {
