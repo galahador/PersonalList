@@ -7,5 +7,5 @@ target 'PersonalList' do
 
   # Pods for PersonalList
   pod 'RealmSwift'
-	
+  pod 'SwipeCellKit'
 end
