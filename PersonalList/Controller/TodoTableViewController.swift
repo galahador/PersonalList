@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class TodoTableViewController: UITableViewController {
+class TodoTableViewController: SwipeViewController {
     var todoItems: Results<Item>?
     let realm = try! Realm()
 
@@ -25,7 +25,7 @@ class TodoTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
         if let item = todoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done ? .checkmark : .none
