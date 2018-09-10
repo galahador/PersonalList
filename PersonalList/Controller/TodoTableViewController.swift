@@ -25,7 +25,7 @@ class TodoTableViewController: SwipeViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         if let item = todoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done ? .checkmark : .none
@@ -41,6 +41,22 @@ class TodoTableViewController: SwipeViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         writeToRealmDoneChack(with: indexPath)
+    }
+
+    override func updateModel(at indexPath: IndexPath) {
+        deleteItem(with: indexPath)
+    }
+
+    fileprivate func deleteItem(with indexPath: IndexPath) {
+        if let item = todoItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    realm.delete(item)
+                }
+            } catch {
+                print("Deleteing errror \(error)")
+            }
+        }
     }
 
     fileprivate func writeToRealmDoneChack(with indexPath: IndexPath) {
@@ -95,10 +111,6 @@ class TodoTableViewController: SwipeViewController {
 
     @IBAction func addNewItems(_ sender: UIBarButtonItem) {
         setupAlertWithTextField()
-    }
-
-    @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
-        //TODO - Create Delete option
     }
 }
 
