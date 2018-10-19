@@ -70,7 +70,6 @@ class TodoTableViewController: SwipeViewController {
                 print("We have a problem \(error)")
             }
         }
-        //        saveItems()
         tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
     }
